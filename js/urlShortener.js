@@ -1,16 +1,18 @@
-var alphabet = "abcdefghijklmnopqrstuvwxyz0123456789.";
+var alphabet = "abcdefghijklmnopqrstuvwxyz0123456789./";
 
 var map = ['b','i','5','2','z','w','m','k','9','0',
            'j','n','q','r','4','p','u','a','3','o',
            'c','1','6','x','d','f','e','7','h','g',
-           'l','s','8','v','t','y','special']
+           'l','s','8','v','t','y','.','/']
 
-var random = ['-','_','~','&','!'];
+var randomPeriod = ['-','_','~','&','!'];
+var randomSlash = ['@','[',']','+','='];
 
 $(document).ready(function(){
     $("#submit").click(function(){
         var longURL = $("#longURL")[0].value;
-        shortenURL(longURL);
+        var encoded = shortenURL(longURL);
+        alert(encoded);
     })
 })
 
@@ -21,8 +23,8 @@ function shortenURL(longURL){
 
     if(isValid){
         longURL = truncateURL(longURL);
-        shortenedURL = 'http://www.jwang.com/' + encodeURL(longURL);
-        alert(shortenedURL);
+        shortenedURL = 'http://www.jwang.io/' + encodeURL(longURL);
+        return shortenedURL;
     } else {
         alert("Error: Please enter a valid URL!");
     }
@@ -52,19 +54,17 @@ function truncateURL(url){
 }
 
 function encodeURL(url){
-    //valid url can contain: 
-    //abcdefghijklmnopqrstuvwxyz0123456789.-_~&!
     
     var shortened = "";
     for(var i=0; i<url.length; i++){
         index = alphabet.indexOf(url.charAt(i));
 
-        if(index != -1){
-            if(map[index] == 'special'){
-                shortened = shortened + random[i % 5];
-            } else {
-                shortened = shortened + map[index];
-            }
+        if(map[index] == '.'){
+            shortened = shortened + randomPeriod[i % 5];
+        } else if(map[index] == '/'){
+            shortened = shortened + randomSlash[i % 5];
+        }else {
+            shortened = shortened + map[index];
         }
     }
     return shortened;
