@@ -1,8 +1,10 @@
 var alphabet = "abcdefghijklmnopqrstuvwxyz0123456789.";
+
 var map = ['b','i','5','2','z','w','m','k','9','0',
            'j','n','q','r','4','p','u','a','3','o',
            'c','1','6','x','d','f','e','7','h','g',
            'l','s','8','v','t','y','special']
+
 var random = ['-','_','~','&','!'];
 
 $(document).ready(function(){
@@ -13,6 +15,7 @@ $(document).ready(function(){
 })
 
 function shortenURL(longURL){
+
     var longURL = prependPrefix(longURL);
     var isValid = validateURL(longURL);
 
